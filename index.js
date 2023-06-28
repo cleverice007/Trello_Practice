@@ -6,9 +6,12 @@ const card_container = document.querySelector('.card-container')
 add_card.addEventListener('click', () => {
   const card_content = document.createElement('div');
   card_content.classList.add('card', 'card-content');
-  card_content.innerHTML = `<textarea id="textarea" rows="1" cols="10"></textarea>`;
-
-  const textarea = card_content.querySelector('#textarea');
+  card_content.innerHTML = `<textarea class="textarea" rows="1" cols="10"></textarea>`;
+  
+  // 設定卡片內容的高度
+  card_content.style.height = `${card_content.clientHeight + 50}px`;
+  
+  const textarea = card_content.querySelector('.textarea');
   textarea.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
       const title = textarea.value;
@@ -19,7 +22,8 @@ add_card.addEventListener('click', () => {
 
         card_content.removeChild(textarea);
         card_content.appendChild(cardTitle);
-       card_container.style.height = `${card_container.clientHeight + 50}px`;
+        // card_container.style.height = `${card_container.clientHeight + 50}px`;
+        card_content.style.height = `${card_content.clientHeight + 50}px`; // 只增加被點擊的卡片高度
 
       }
     }
@@ -27,3 +31,4 @@ add_card.addEventListener('click', () => {
 
   card_body.appendChild(card_content);
 });
+
