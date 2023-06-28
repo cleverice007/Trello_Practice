@@ -14,6 +14,7 @@ add_card.addEventListener('click', () => {
   const textarea = card_content.querySelector('.textarea');
   textarea.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
+      event.preventDefault();
       const title = textarea.value;
       if (title !== '') {
         const cardTitle = document.createElement('div');
@@ -23,7 +24,6 @@ add_card.addEventListener('click', () => {
         card_content.removeChild(textarea);
         card_content.appendChild(cardTitle);
         // card_container.style.height = `${card_container.clientHeight + 50}px`;
-        card_content.style.height = `${card_content.clientHeight + 50}px`; // 只增加被點擊的卡片高度
 
       }
     }
