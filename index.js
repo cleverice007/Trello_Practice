@@ -2,15 +2,15 @@ const add_card = document.querySelector('.add-card')
 const card_body = document.querySelector('.card-body')
 const card_container = document.querySelector('.card-container')
 
-  // 大卡片裡面新增小卡片
+// 大卡片裡面新增小卡片
 add_card.addEventListener('click', () => {
   const card_content = document.createElement('div');
   card_content.classList.add('card', 'card-content');
   card_content.innerHTML = `<textarea class="textarea" rows="1" cols="10"></textarea>`;
-  
+
   // 設定卡片內容的高度
   card_content.style.height = `${card_content.clientHeight + 20}px`;
-  
+
   const textarea = card_content.querySelector('.textarea');
   textarea.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
@@ -32,18 +32,21 @@ add_card.addEventListener('click', () => {
   card_body.appendChild(card_content);
 });
 
-  // 大卡片旁邊新增大卡片
+// 大卡片旁邊新增大卡片
 const add_list = document.querySelector('.add-list');
 
 add_list.addEventListener('click', () => {
-  const card_list = document.createElement('div');
-  card_list.classList.add('card', 'card-list');
-  card_list.innerHTML = `
+  const container = document.querySelector('.container');
+  const card = document.createElement('div');
+  card.classList.add('card', 'card-container');
+  card.innerHTML = `
+    <div class="card-header">Card Title</div>
     <div class="card-body">
-      <div class="card-content">
-        <textarea class="textarea" rows="1" cols="10"></textarea>
-      </div>
+
+    </div>
+    <button class="add-card">+ Add a card</button>
     </div>
   `;
+   container.appendChild(card);
 });
 
