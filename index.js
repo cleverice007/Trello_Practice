@@ -13,7 +13,6 @@ container.addEventListener('click', (event) => {
     card_content.innerHTML = `<textarea class="textarea" rows="1" cols="10"></textarea>`;
 
     // 設定卡片內容的高度
-    card_content.style.height = `${card_content.clientHeight + 20}px`;
 
     const textarea = card_content.querySelector('.textarea');
     textarea.addEventListener('keydown', function (event) {
@@ -32,8 +31,8 @@ container.addEventListener('click', (event) => {
         }
       }
     });
-
     card_body.appendChild(card_content);
+    card_container.style.height = `${card_container.clientHeight + 20}px`;
   }
 });
 

@@ -14,6 +14,9 @@ body{
     padding: 10px;
     width: 300px;
   }
+  .card-container{
+    height: 66px;
+  }
   
   .card-header {
     font-weight: bold;
