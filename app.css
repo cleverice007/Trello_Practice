@@ -1,6 +1,12 @@
+body{
+  display: flex;
+  flex-direction: row;
+}
+
 .container {
     display: flex;
     justify-content: left;
+    margin-right: 10px;
   }
 
 .card {
