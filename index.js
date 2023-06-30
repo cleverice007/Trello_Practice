@@ -2,6 +2,8 @@
 
 // 大卡片裡面新增小卡片
 const container = document.querySelector('.container');
+let cardIdCounter = 0;
+
 
 container.addEventListener('click', (event) => {
   if (event.target.classList.contains('add-card')) {
@@ -9,10 +11,12 @@ container.addEventListener('click', (event) => {
     const card_body = card_container.querySelector('.card-body');
 
     const card_content = document.createElement('div');
+    const cardId = `card-${cardIdCounter}`;
+    card_content.id = cardId;
+    cardIdCounter += 1;
+    card_content.draggable = true;
     card_content.classList.add('card', 'card-content');
     card_content.innerHTML = `<textarea class="textarea" rows="1" cols="10"></textarea>`;
-
-    // 設定卡片內容的高度
 
     const textarea = card_content.querySelector('.textarea');
     textarea.addEventListener('keydown', function (event) {
@@ -32,6 +36,7 @@ container.addEventListener('click', (event) => {
       }
     });
     card_body.appendChild(card_content);
+      // 設定卡片內容的高度
     card_container.style.height = `${card_container.clientHeight + 20}px`;
   }
 });
@@ -53,4 +58,32 @@ add_list.addEventListener('click', () => {
   `;
    container.appendChild(card);
 });
+
+// draging card function
+const cards = document.querySelectorAll('.card');
+
+cards.forEach(card => {
+  card.addEventListener('dragstart', dragStart);
+  card.addEventListener('dragover', dragOver);
+  card.addEventListener('drop', drop);
+});
+
+
+function dragStart(event) {
+  event.dataTransfer.setData('text/plain', event.target.id);
+  event.target.classList.add('dragging');
+}
+
+function dragOver(event) {
+  event.preventDefault();
+  event.target.classList.add('drag-over');
+}
+
+function drop(event) {
+  event.preventDefault();
+  event.target.classList.remove('drag-over');
+  const cardId = event.dataTransfer.getData('text/plain');
+  const card = document.getElementById(cardId);
+  event.target.appendChild(card);
+}
 

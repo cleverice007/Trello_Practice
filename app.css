@@ -41,4 +41,15 @@ body{
   .add-text {
     color: #333;
   }
+
+  /* card dragging */
+
+
+.dragging {
+  opacity: 0.5;
+}
+
+.drag-over {
+  border: 2px dashed red;
+}
   
