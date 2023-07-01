@@ -7,6 +7,9 @@ body{
     display: flex;
     justify-content: left;
     margin-right: 10px;
+    background-color: gray;
+    height: 500px;
+    weight: 500px;
   }
 
 .card {
@@ -30,7 +33,12 @@ body{
   }
 .card-content {
     background-color: white;
+
+  }
+  .textarea {
+        height: 20px;
         width: 90%;
+
   }
   
   .add-icon {
@@ -52,4 +60,6 @@ body{
 .drag-over {
   border: 2px dashed red;
 }
+
+
   

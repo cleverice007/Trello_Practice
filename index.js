@@ -36,7 +36,7 @@ container.addEventListener('click', (event) => {
       }
     });
     card_body.appendChild(card_content);
-      // 設定卡片內容的高度
+    // 設定卡片內容的高度
     card_container.style.height = `${card_container.clientHeight + 20}px`;
   }
 });
@@ -56,34 +56,34 @@ add_list.addEventListener('click', () => {
     <button class="add-card">+ Add a card</button>
     </div>
   `;
-   container.appendChild(card);
+  container.appendChild(card);
 });
 
 // draging card function
-const cards = document.querySelectorAll('.card');
+const dragedCards = document.querySelectorAll('.card-content');
+const cardBodies = document.querySelectorAll('.card-body');
 
-cards.forEach(card => {
-  card.addEventListener('dragstart', dragStart);
-  card.addEventListener('dragover', dragOver);
-  card.addEventListener('drop', drop);
-});
 
 
 function dragStart(event) {
   event.dataTransfer.setData('text/plain', event.target.id);
-  event.target.classList.add('dragging');
 }
 
 function dragOver(event) {
   event.preventDefault();
-  event.target.classList.add('drag-over');
 }
 
 function drop(event) {
   event.preventDefault();
-  event.target.classList.remove('drag-over');
   const cardId = event.dataTransfer.getData('text/plain');
   const card = document.getElementById(cardId);
-  event.target.appendChild(card);
+  const cardBody = event.currentTarget.querySelector('.card-body');
+  if (card & cardBody) {
+    cardBody.appendChild(card);
+  }
 }
+
+
+
+
 
