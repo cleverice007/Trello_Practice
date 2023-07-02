@@ -3,6 +3,7 @@
 // 大卡片裡面新增小卡片
 const container = document.querySelector('.container');
 let cardIdCounter = 0;
+let containerIdCounter = 1;
 
 
 container.addEventListener('click', (event) => {
@@ -45,18 +46,18 @@ container.addEventListener('click', (event) => {
 const add_list = document.querySelector('.add-list');
 
 add_list.addEventListener('click', () => {
-  const container = document.querySelector('.container');
-  const card = document.createElement('div');
-  card.classList.add('card', 'card-container');
-  card.innerHTML = `
-    <div class="card-header">Card Title</div>
-    <div class="card-body">
-
-    </div>
-    <button class="add-card">+ Add a card</button>
-    </div>
+  const body = document.querySelector('body');
+  const container = document.createElement('container');
+  container.classList.add('container');
+  const containerId = `container-${cardIdCounter}`;
+  container.id = containerId;
+  containerIdCounter += 1;
+  container.innerHTML = `
+  <div class="card" id=card-0>Card1 
+  <button class = add-card>+ Add a card</button>
+</div>
   `;
-  container.appendChild(card);
+  body.insertBefore(container,add_list.parentNode);
 });
 
 // draging card function
