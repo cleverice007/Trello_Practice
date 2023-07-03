@@ -1,46 +1,32 @@
 
 
 // 大卡片裡面新增小卡片
-const container = document.querySelector('.container');
-let cardIdCounter = 0;
+const add_cards = document.querySelectorAll('.add-card');
+let cardIdCounter = 1;
 let containerIdCounter = 1;
 
-
-container.addEventListener('click', (event) => {
+document.addEventListener('click', (event) => {
   if (event.target.classList.contains('add-card')) {
-    const card_container = event.target.closest('.card-container');
-    const card_body = card_container.querySelector('.card-body');
+    const addCardButton = event.target;
+    const container = addCardButton.closest('.container');
+    if (container) {
+      const card = document.createElement('div');
+      card.classList.add('card');
+      const cardId = `card-${cardIdCounter}`;
+      card.id = cardId;
+      cardIdCounter += 1;
+      card.draggable = true;
 
-    const card_content = document.createElement('div');
-    const cardId = `card-${cardIdCounter}`;
-    card_content.id = cardId;
-    cardIdCounter += 1;
-    card_content.draggable = true;
-    card_content.classList.add('card', 'card-content');
-    card_content.innerHTML = `<textarea class="textarea" rows="1" cols="10"></textarea>`;
+      container.insertBefore(card, addCardButton.parentNode);
 
-    const textarea = card_content.querySelector('.textarea');
-    textarea.addEventListener('keydown', function (event) {
-      if (event.key === 'Enter') {
-        event.preventDefault();
-        const title = textarea.value;
-        if (title !== '') {
-          const cardTitle = document.createElement('div');
-          cardTitle.classList.add('card-title');
-          cardTitle.textContent = title;
-
-          card_content.removeChild(textarea);
-          card_content.appendChild(cardTitle);
-          // card_container.style.height = `${card_container.clientHeight + 50}px`;
-
-        }
-      }
-    });
-    card_body.appendChild(card_content);
-    // 設定卡片內容的高度
-    card_container.style.height = `${card_container.clientHeight + 20}px`;
+      // 調整容器的高度，包括新增的卡片和 add-a-card 按鈕
+      let cardHeight = card.clientHeight;
+      let addButtonHeight = addCardButton.clientHeight;
+      container.style.height = `${container.clientHeight + cardHeight + addButtonHeight}px`;      
+    }
   }
 });
+
 
 // 大卡片旁邊新增大卡片
 const add_list = document.querySelector('.add-list');

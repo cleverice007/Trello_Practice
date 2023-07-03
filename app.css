@@ -5,6 +5,7 @@ body{
 
 .container {
     display: flex;
+    flex-direction: column;
     justify-content: left;
     background-color: gray;
       width: 200px;
