@@ -2,6 +2,8 @@
 
 // 大卡片裡面新增小卡片
 const add_cards = document.querySelectorAll('.add-card');
+const containers = document.querySelectorAll('.container');
+const cards = document.querySelectorAll('.card');
 let cardIdCounter = 1;
 let containerIdCounter = 1;
 
@@ -22,7 +24,10 @@ document.addEventListener('click', (event) => {
       // 調整容器的高度，包括新增的卡片和 add-a-card 按鈕
       let cardHeight = card.clientHeight;
       let addButtonHeight = addCardButton.clientHeight;
-      container.style.height = `${container.clientHeight + cardHeight + addButtonHeight}px`;      
+      container.style.height = `${container.clientHeight + cardHeight + addButtonHeight}px`;   
+      
+      card.addEventListener('dragstart', dragStart);
+      card.addEventListener('dragend', dragEnd);
     }
   }
 });
@@ -38,37 +43,68 @@ add_list.addEventListener('click', () => {
   const containerId = `container-${cardIdCounter}`;
   container.id = containerId;
   containerIdCounter += 1;
-  container.innerHTML = `
-  <div class="card" id=card-0>Card1 
-  <button class = add-card>+ Add a card</button>
-</div>
-  `;
+  const card = document.createElement('div');
+  card.classList.add('card');
+  const addCardButton = document.createElement('button');
+  addCardButton.classList.add('add-card');
+  addCardButton.textContent = '+ Add a card';
+  
   body.insertBefore(container,add_list.parentNode);
+  container.appendChild(card);
+  card.appendChild(addCardButton);
+  container.addEventListener('dragover', dragOver);
+  container.addEventListener('dragenter', dragEnter);
+  container.addEventListener('dragleave', dragLeave);
+  container.addEventListener('drop', drop);
 });
 
 // draging card function
-const dragedCards = document.querySelectorAll('.card-content');
-const cardBodies = document.querySelectorAll('.card-body');
 
+let currentCard = null;
 
+// Drag and drop events
+cards.forEach(card => {
+  card.addEventListener('dragstart', dragStart);
+  card.addEventListener('dragend', dragEnd);
+});
 
-function dragStart(event) {
-  event.dataTransfer.setData('text/plain', event.target.id);
+containers.forEach(container => {
+  container.addEventListener('dragover', dragOver);
+  container.addEventListener('dragenter', dragEnter);
+  container.addEventListener('dragleave', dragLeave);
+  container.addEventListener('drop', drop);
+});
+
+function dragStart() {
+  currentCard = this;
+  setTimeout(() => {
+    this.style.display = 'none';
+  }, 0);
 }
 
-function dragOver(event) {
-  event.preventDefault();
+function dragEnd() {
+  currentCard = null;
+  this.style.display = 'block';
 }
 
-function drop(event) {
-  event.preventDefault();
-  const cardId = event.dataTransfer.getData('text/plain');
-  const card = document.getElementById(cardId);
-  const cardBody = event.currentTarget.querySelector('.card-body');
-  if (card & cardBody) {
-    cardBody.appendChild(card);
-  }
+function dragOver(e) {
+  e.preventDefault();
 }
+
+function dragEnter(e) {
+  e.preventDefault();
+  this.style.backgroundColor = 'lightgray';
+}
+
+function dragLeave() {
+  this.style.backgroundColor = 'gray';
+}
+
+function drop() {
+  this.appendChild(currentCard);
+  this.style.backgroundColor = 'gray';
+}
+
 
 
 
