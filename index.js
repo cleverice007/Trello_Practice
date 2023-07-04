@@ -41,7 +41,6 @@ adding_list.addEventListener('click', () => {
   const addCardButton = document.createElement('button');
   addCardButton.classList.add('add-card');
   addCardButton.textContent = '+ Add a card';
-  container.addCardButton = addCardButton; // 將按鈕參考存儲在容器的自定義屬性中
 
 
   container.appendChild(addCardButton);
