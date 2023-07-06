@@ -48,22 +48,52 @@ const adding_list = document.querySelector('.adding-list');
 
 adding_list.addEventListener('click', () => {
   const body = document.querySelector('body');
-  const container = document.createElement('container');
+  const container = document.createElement('div');
   container.classList.add('container');
 
+  const input = document.createElement('input');
+  input.classList.add('card-input');
+  input.placeholder = 'Enter a title...';
 
-  const addCardButton = document.createElement('button');
-  addCardButton.classList.add('add-card');
-  addCardButton.textContent = '+ Add a card';
+  const addButton = document.createElement('button');
+  addButton.classList.add('add-card');
+  addButton.textContent = '+ Add a card';
 
-
-  container.appendChild(addCardButton);
+  container.appendChild(input);
+  container.appendChild(addButton);
   body.insertBefore(container, adding_list);
   container.addEventListener('dragover', dragOver);
   container.addEventListener('dragenter', dragEnter);
   container.addEventListener('dragleave', dragLeave);
   container.addEventListener('drop', drop);
+
+  input.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      const title = input.value;
+      const titleElement = document.createElement('div');
+      titleElement.classList.add('card-title');
+      titleElement.textContent = title;
+      container.insertBefore(titleElement, input);
+      input.style.display = 'none';
+    }
+  });
 });
+
+// 第一個container的input
+const input = document.querySelector('.card-input');
+
+input.addEventListener('keydown', function (event) {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    const container = document.querySelector('.container');
+    const title = input.value;
+    const titleElement = document.createElement('div');
+    titleElement.classList.add('card-title');
+    titleElement.textContent = title;
+    container.insertBefore(titleElement, input);
+    input.style.display = 'none';
+  }});
 
 // draging card function
 
