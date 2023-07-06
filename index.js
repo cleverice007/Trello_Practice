@@ -15,22 +15,19 @@ document.addEventListener('click', (event) => {
       card.setAttribute('draggable', true);
       container.insertBefore(card, addCardButton);
 
-      // 调整容器的高度，包括新增的卡片和 add-a-card 按钮
       let cardHeight = card.clientHeight;
       let addButtonHeight = addCardButton.clientHeight;
       container.style.height = `${container.clientHeight + cardHeight + addButtonHeight}px`;
 
-      // 让焦点集中在卡片上
       card.setAttribute('contenteditable', true);
       card.focus();
 
-      // 监听卡片的按键事件
       card.addEventListener('keydown', function(event) {
         if (event.key === 'Enter') {
           event.preventDefault();
-          // 将输入的文字作为卡片的标题
           const title = card.textContent;
           card.innerHTML = `<div class="card-title">${title}</div>`;
+          card.setAttribute('contenteditable', false);
           card.blur();
         }
       });
