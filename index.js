@@ -10,15 +10,19 @@ document.addEventListener('click', (event) => {
     const addCardButton = event.target;
     const container = addCardButton.closest('.container');
     if (container) {
+      // 創造卡片
       const card = document.createElement('div');
       card.classList.add('card');
       card.setAttribute('draggable', true);
       container.insertBefore(card, addCardButton);
-
+      //給 card unique id
+      const cardId = Math.floor(Math.random() * 100000);
+      card.setAttribute('id', cardId);
+      //新卡片要增加的高度
       let cardHeight = card.clientHeight;
       let addButtonHeight = addCardButton.clientHeight;
       container.style.height = `${container.clientHeight + cardHeight + addButtonHeight}px`;
-
+      // card title 可供輸入
       card.setAttribute('contenteditable', true);
       card.focus();
 
@@ -139,6 +143,34 @@ function drop(event) {
   const addCardButton = container.querySelector('.add-card'); // 使用 querySelector 查找 add-card 按鈕
   container.insertBefore(currentCard, addCardButton);
   container.style.backgroundColor = 'gray';
+}
+
+
+// create modal
+function createModal(cardId, cardTitle) {
+  const modalId = `modal-${cardId}`;
+  const modal = document.createElement('div');
+  modal.classList.add('modal');
+  modal.setAttribute('id', modalId);
+
+  // 添加標題元素
+  const titleElement = document.createElement('h2');
+  titleElement.textContent = cardTitle;
+  modal.appendChild(titleElement);
+
+  // 添加描述區域
+  const descriptionTextarea = document.createElement('textarea');
+  descriptionTextarea.classList.add('description');
+  descriptionTextarea.setAttribute('placeholder', 'Enter description...');
+  modal.appendChild(descriptionTextarea);
+
+  // 添加評論區域
+  const commentTextarea = document.createElement('textarea');
+  commentTextarea.classList.add('comment');
+  commentTextarea.setAttribute('placeholder', 'Enter comment...');
+  modal.appendChild(commentTextarea);
+
+  return modal;
 }
 
 
