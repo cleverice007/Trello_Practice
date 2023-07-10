@@ -4,6 +4,44 @@
 const containers = document.querySelectorAll('.container');
 const cards = document.querySelectorAll('.card');
 
+// create modal
+function createModal(cardId, cardTitle,card) {
+  const modalId = `modal-${cardId}`;
+  const modal = document.createElement('div');
+  modal.classList.add('modal');
+  modal.setAttribute('id', modalId);
+
+  const modalContent = document.createElement('div');
+  modalContent.classList.add('modal-content');
+
+  const titleElement = document.createElement('h2');
+  titleElement.textContent = cardTitle;
+
+  const closeButton = document.createElement('span');
+  closeButton.classList.add('close');
+  closeButton.innerHTML = '&times;';
+
+  modalContent.appendChild(titleElement);
+  modalContent.appendChild(closeButton);
+  modal.appendChild(modalContent);
+
+  document.body.appendChild(modal);
+
+  card.addEventListener('click', function() {
+    modal.style.display = 'block';
+  });
+
+  closeButton.addEventListener('click', function() {
+    modal.style.display = 'none';
+  });
+
+  window.addEventListener('click', function(event) {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+}
+
 
 // create card
 
@@ -11,7 +49,8 @@ function createCard(cardId) {
   const card = document.createElement('div');
   card.classList.add('card');
   card.setAttribute('draggable', true);
-  card.setAttribute('id', cardId);
+  card.setAttribute('data-card-id', cardId);
+
   card.setAttribute('contenteditable', true);
   card.focus();
 
@@ -22,6 +61,10 @@ function createCard(cardId) {
       card.innerHTML = `<div class="card-title">${title}</div>`;
       card.setAttribute('contenteditable', false);
       card.blur();
+
+      card.addEventListener('click', function() {
+        createModal(cardId, title, card);
+      });
     }
   });
 
@@ -32,32 +75,7 @@ function createCard(cardId) {
 }
 
 
-// create modal
-function createModal(cardId, cardTitle) {
-  const modalId = `modal-${cardId}`;
-  const modal = document.createElement('div');
-  modal.classList.add('modal');
-  modal.setAttribute('id', modalId);
 
-  // 添加標題元素
-  const titleElement = document.createElement('h2');
-  titleElement.textContent = cardTitle;
-  modal.appendChild(titleElement);
-
-  // 添加描述區域
-  const descriptionTextarea = document.createElement('textarea');
-  descriptionTextarea.classList.add('description');
-  descriptionTextarea.setAttribute('placeholder', 'Enter description...');
-  modal.appendChild(descriptionTextarea);
-
-  // 添加評論區域
-  const commentTextarea = document.createElement('textarea');
-  commentTextarea.classList.add('comment');
-  commentTextarea.setAttribute('placeholder', 'Enter comment...');
-  modal.appendChild(commentTextarea);
-
-  return modal;
-}
 
 
 
@@ -72,12 +90,12 @@ document.addEventListener('click', (event) => {
       let cardHeight = card.clientHeight;
       let addButtonHeight = addCardButton.clientHeight;
       container.style.height = `${container.clientHeight + cardHeight + addButtonHeight}px`;
-      card.addEventListener('click', function() {
-        createModal(cardId, card.textContent);
-      });
+
+
     }
   }
 });
+
 
 
 
