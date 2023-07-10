@@ -5,7 +5,7 @@ const containers = document.querySelectorAll('.container');
 const cards = document.querySelectorAll('.card');
 
 // create modal
-function createModal(cardId, cardTitle,card) {
+function createModal(cardId, cardTitle, card) {
   const modalId = `modal-${cardId}`;
   const modal = document.createElement('div');
   modal.classList.add('modal');
@@ -15,6 +15,7 @@ function createModal(cardId, cardTitle,card) {
   modalContent.classList.add('modal-content');
 
   const titleElement = document.createElement('h2');
+  titleElement.setAttribute('contenteditable', true);
   titleElement.textContent = cardTitle;
 
   const closeButton = document.createElement('span');
@@ -27,19 +28,27 @@ function createModal(cardId, cardTitle,card) {
 
   document.body.appendChild(modal);
 
-  card.addEventListener('click', function() {
-    modal.style.display = 'block';
+  titleElement.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      card.innerHTML = `<div class="card-title">${titleElement.textContent}</div>`;
+      titleElement.blur();
+    }
   });
 
   closeButton.addEventListener('click', function() {
+    card.innerHTML = `<div class="card-title">${titleElement.textContent}</div>`;
     modal.style.display = 'none';
   });
 
   window.addEventListener('click', function(event) {
     if (event.target === modal) {
+      card.innerHTML = `<div class="card-title">${titleElement.textContent}</div>`;
       modal.style.display = 'none';
     }
   });
+  modal.style.display = 'block';
+  return modal;
 }
 
 
@@ -61,18 +70,22 @@ function createCard(cardId) {
       card.innerHTML = `<div class="card-title">${title}</div>`;
       card.setAttribute('contenteditable', false);
       card.blur();
-
       card.addEventListener('click', function() {
-        createModal(cardId, title, card);
+        createModal(cardId, card.textContent, card);  
+    
       });
     }
   });
+
+
+  
 
   card.addEventListener('dragstart', dragStart);
   card.addEventListener('dragend', dragEnd);
 
   return card;
 }
+
 
 
 
@@ -90,8 +103,6 @@ document.addEventListener('click', (event) => {
       let cardHeight = card.clientHeight;
       let addButtonHeight = addCardButton.clientHeight;
       container.style.height = `${container.clientHeight + cardHeight + addButtonHeight}px`;
-
-
     }
   }
 });
