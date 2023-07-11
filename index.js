@@ -18,11 +18,33 @@ function createModal(cardId, cardTitle, card) {
   titleElement.setAttribute('contenteditable', true);
   titleElement.textContent = cardTitle;
 
+  const descriptionElement = document.createElement('textarea');
+  descriptionElement.placeholder = 'Enter description...';
+  const descriptionSaveButton = document.createElement('button');
+  descriptionSaveButton.textContent = 'Save';
+  descriptionSaveButton.addEventListener('click', function() {
+    localStorage.setItem(`description-${cardId}`, descriptionElement.value);
+  });
+  descriptionElement.value = localStorage.getItem(`description-${cardId}`) || '';
+
+  const commentElement = document.createElement('textarea');
+  commentElement.placeholder = 'Enter comment...';
+  const commentSaveButton = document.createElement('button');
+  commentSaveButton.textContent = 'Save';
+  commentSaveButton.addEventListener('click', function() {
+    localStorage.setItem(`comment-${cardId}`, commentElement.value);
+  });
+  commentElement.value = localStorage.getItem(`comment-${cardId}`) || '';
+
   const closeButton = document.createElement('span');
   closeButton.classList.add('close');
   closeButton.innerHTML = '&times;';
 
   modalContent.appendChild(titleElement);
+  modalContent.appendChild(descriptionElement);
+  modalContent.appendChild(descriptionSaveButton);
+  modalContent.appendChild(commentElement);
+  modalContent.appendChild(commentSaveButton);
   modalContent.appendChild(closeButton);
   modal.appendChild(modalContent);
 
@@ -47,9 +69,11 @@ function createModal(cardId, cardTitle, card) {
       modal.style.display = 'none';
     }
   });
+
   modal.style.display = 'block';
   return modal;
 }
+
 
 
 // create card
