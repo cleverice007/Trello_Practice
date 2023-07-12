@@ -8,44 +8,75 @@ body{
   display: flex;
   flex-direction: column;
   background-color: #ebecf0;
-  border-radius: 10px;
-  width: 270px;
-  margin: 10px;
-  padding: 10px;
-  max-height: 90vh;
+  border-radius: 30px;
+  width: 270px; 
+  margin: 20px;
+  padding: 20px;
   overflow-y: auto;
 }
 
+input {
+  background-color: #ebecf0;
+  border: none; 
+  padding: 5px; 
+  font-size: 16px; 
+  margin-bottom: 10px; 
+  font-weight: bold;
+}
+
+input:focus {
+  outline: none; 
+}
+
+
 .container-title {
   background-color: #ebecf0;
-  border-radius: 10px;
-  padding: 10px;
-  font-size: 20px;
-  margin-bottom: 10px;
+  border: none; 
+  padding: 5px; 
+  font-size: 16px; 
+  margin-bottom: 20px; 
+  font-weight: bold; 
 }
 
 .card {
   background-color: #fff;
   border-radius: 10px;
   margin-bottom: 10px;
-  padding: 10px;
-  font-size: 14px;
-  word-wrap: break-word;
+  padding: 6px;
+  font-size: 16px;
 }
 
 .add-card {
-  background-color: #fff;
+  border: none; 
   border-radius: 10px;
-  padding: 10px;
-  color: #5e6c84;
-  margin-bottom: 10px;
+  padding: 8px; 
+  background-color: #ebecf0;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-size: 16px; 
+  text-align: left;
+  font-weight: bold;
+  color: gray;
 }
 
 .add-card:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  background-color:  darkgray;  
 }
+
+
+.add-list {
+  border-radius: 15px; 
+  background-color: #FFFFFF3D; 
+  transition: background-color 0.3s ease;
+  padding: 10px 80px;
+  border: none;
+  text-align: left;
+  }
+
+.add-list:hover {
+  background-color: #FFFFFF2D;
+}
+
 
 .textarea {
   width: 100%;

@@ -1,4 +1,6 @@
-
+//兩個bug 新的 container 跟後來新增高度的container 一樣高
+// drag and drop 有bug ，應該是把 card title 改成 input title 有關
+// 少一個 navbar 跟 sidebar
 
 // 大卡片裡面新增小卡片
 const containers = document.querySelectorAll('.container');
@@ -163,7 +165,7 @@ adding_list.addEventListener('click', () => {
       event.preventDefault();
       const title = input.value;
       const titleElement = document.createElement('div');
-      titleElement.classList.add('card-title');
+      titleElement.classList.add('container-title');
       titleElement.textContent = title;
       container.insertBefore(titleElement, input);
       input.style.display = 'none';
@@ -172,7 +174,7 @@ adding_list.addEventListener('click', () => {
 });
 
 // 第一個container的input
-const input = document.querySelector('.card-input');
+const input = document.querySelector('.container-input');
 
 input.addEventListener('keydown', function (event) {
   if (event.key === 'Enter') {
@@ -180,7 +182,7 @@ input.addEventListener('keydown', function (event) {
     const container = document.querySelector('.container');
     const title = input.value;
     const titleElement = document.createElement('div');
-    titleElement.classList.add('card-title');
+    titleElement.classList.add('container-title');
     titleElement.textContent = title;
     container.insertBefore(titleElement, input);
     input.style.display = 'none';
