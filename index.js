@@ -116,6 +116,8 @@ function createCard(cardId) {
 
 
 
+
+
 document.addEventListener('click', (event) => {
   if (event.target.classList.contains('add-card')) {
     const addCardButton = event.target;
@@ -124,14 +126,12 @@ document.addEventListener('click', (event) => {
       const cardId = Math.floor(Math.random() * 100000);
       const card = createCard(cardId);
       container.insertBefore(card, addCardButton);
-
-      // Adjust container height
-      const cardHeight = card.clientHeight;  // Get the actual height of the card
-      container.style.height = `${container.clientHeight + cardHeight}px`;
+      let cardHeight = card.clientHeight;
+      let addButtonHeight = addCardButton.clientHeight;
+      container.style.height = `${container.clientHeight + cardHeight + addButtonHeight}px`;
     }
   }
 });
-
 
 
 
