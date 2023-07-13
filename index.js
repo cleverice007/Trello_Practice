@@ -1,5 +1,5 @@
-//兩個bug 新的 container 跟後來新增高度的container 一樣高
-// drag and drop 有bug ，應該是把 card title 改成 input title 有關
+// drag and drop 有bug ，card 上下之間移動
+// 移動、減少卡片時 ，container 高度也要改變
 // 少一個 navbar 跟 sidebar
 
 // 大卡片裡面新增小卡片
@@ -210,6 +210,13 @@ function dragStart() {
   setTimeout(() => {
     this.style.display = 'none';
   }, 0);
+  
+  // Get the container of the current card
+  const container = this.closest('.container');
+  if (container) {
+    // Reduce the height of the container by the height of the card
+    container.style.height = `${container.clientHeight - this.clientHeight}px`;
+  }
 }
 
 function dragEnd() {
@@ -223,19 +230,23 @@ function dragOver(e) {
 
 function dragEnter(e) {
   e.preventDefault();
-  this.style.backgroundColor = 'lightgray';
-}
+  this.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';}
 
 function dragLeave() {
-  this.style.backgroundColor = 'gray';
-}
+  this.style.backgroundColor = 'white';}
 
-function drop(event) {
-  const container = event.target;
-  const addCardButton = container.querySelector('.add-card'); // 使用 querySelector 查找 add-card 按鈕
-  container.insertBefore(currentCard, addCardButton);
-  container.style.backgroundColor = 'gray';
-}
+  function drop(event) {
+    if (event.target.classList.contains('container')) {
+      const container = event.target;
+      const addCardButton = container.querySelector('.add-card'); // Use querySelector to find add-card button
+  
+      // Increase the height of the container by the height of the card
+      container.style.height = `${container.clientHeight + currentCard.clientHeight}px`;
+      
+      container.insertBefore(currentCard, addCardButton);
+    }
+  }
+
 
 
 
