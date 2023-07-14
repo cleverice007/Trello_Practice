@@ -1,5 +1,4 @@
 // drag and drop 有bug ，card 上下之間移動
-// 移動、減少卡片時 ，container 高度也要改變
 // 少一個 navbar 跟 sidebar
 
 // 大卡片裡面新增小卡片
@@ -24,7 +23,7 @@ function createModal(cardId, cardTitle, card) {
   descriptionElement.placeholder = 'Enter description...';
   const descriptionSaveButton = document.createElement('button');
   descriptionSaveButton.textContent = 'Save';
-  descriptionSaveButton.addEventListener('click', function() {
+  descriptionSaveButton.addEventListener('click', function () {
     localStorage.setItem(`description-${cardId}`, descriptionElement.value);
   });
   descriptionElement.value = localStorage.getItem(`description-${cardId}`) || '';
@@ -33,7 +32,7 @@ function createModal(cardId, cardTitle, card) {
   commentElement.placeholder = 'Enter comment...';
   const commentSaveButton = document.createElement('button');
   commentSaveButton.textContent = 'Save';
-  commentSaveButton.addEventListener('click', function() {
+  commentSaveButton.addEventListener('click', function () {
     localStorage.setItem(`comment-${cardId}`, commentElement.value);
   });
   commentElement.value = localStorage.getItem(`comment-${cardId}`) || '';
@@ -52,7 +51,7 @@ function createModal(cardId, cardTitle, card) {
 
   document.body.appendChild(modal);
 
-  titleElement.addEventListener('keydown', function(event) {
+  titleElement.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
       event.preventDefault();
       card.innerHTML = `<div class="card-title">${titleElement.textContent}</div>`;
@@ -60,12 +59,12 @@ function createModal(cardId, cardTitle, card) {
     }
   });
 
-  closeButton.addEventListener('click', function() {
+  closeButton.addEventListener('click', function () {
     card.innerHTML = `<div class="card-title">${titleElement.textContent}</div>`;
     modal.style.display = 'none';
   });
 
-  window.addEventListener('click', function(event) {
+  window.addEventListener('click', function (event) {
     if (event.target === modal) {
       card.innerHTML = `<div class="card-title">${titleElement.textContent}</div>`;
       modal.style.display = 'none';
@@ -89,22 +88,22 @@ function createCard(cardId) {
   card.setAttribute('contenteditable', true);
   card.focus();
 
-  card.addEventListener('keydown', function(event) {
+  card.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
       event.preventDefault();
       const title = card.textContent;
       card.innerHTML = `<div class="card-title">${title}</div>`;
       card.setAttribute('contenteditable', false);
       card.blur();
-      card.addEventListener('click', function() {
-        createModal(cardId, card.textContent, card);  
-    
+      card.addEventListener('click', function () {
+        createModal(cardId, card.textContent, card);
+
       });
     }
   });
 
 
-  
+
 
   card.addEventListener('dragstart', dragStart);
   card.addEventListener('dragend', dragEnd);
@@ -186,7 +185,8 @@ input.addEventListener('keydown', function (event) {
     titleElement.textContent = title;
     container.insertBefore(titleElement, input);
     input.style.display = 'none';
-  }});
+  }
+});
 
 // draging card function
 
@@ -210,14 +210,14 @@ function dragStart() {
   setTimeout(() => {
     this.style.display = 'none';
   }, 0);
-  
-  // Get the container of the current card
+
   const container = this.closest('.container');
+  const addCardButton = container.querySelector('.add-card');
   if (container) {
-    // Reduce the height of the container by the height of the card
-    container.style.height = `${container.clientHeight - this.clientHeight}px`;
+    container.style.height = `${container.clientHeight - this.clientHeight - addCardButton.clientHeight}px`;
   }
 }
+
 
 function dragEnd() {
   currentCard = null;
@@ -230,22 +230,30 @@ function dragOver(e) {
 
 function dragEnter(e) {
   e.preventDefault();
-  this.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';}
+}
 
 function dragLeave() {
-  this.style.backgroundColor = 'white';}
+  this.style.backgroundColor = 'white';
+}
 
-  function drop(event) {
-    if (event.target.classList.contains('container')) {
-      const container = event.target;
-      const addCardButton = container.querySelector('.add-card'); // Use querySelector to find add-card button
-  
-      // Increase the height of the container by the height of the card
-      container.style.height = `${container.clientHeight + currentCard.clientHeight}px`;
-      
-      container.insertBefore(currentCard, addCardButton);
-    }
+function drop(event) {
+  if (event.target.classList.contains('container')) {
+    const container = event.target;
+    const addCardButton = container.querySelector('.add-card');
+    const cardMargin = 10; 
+    container.insertBefore(currentCard, addCardButton);
+
+    container.style.height = `${container.clientHeight + currentCard.offsetHeight + cardMargin + addCardButton.clientHeight}px`;
+
+    addCardButton.style.top = `${parseInt(addCardButton.style.top) + currentCard.offsetHeight + cardMargin}px`;
   }
+}
+
+
+
+
+
+
 
 
 
