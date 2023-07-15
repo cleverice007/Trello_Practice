@@ -1,8 +1,171 @@
-body{
+body {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   background: #0079bf;
 }
+
+
+
+/* header */
+
+.header {
+  display: flex;
+  flex-direction: row;
+  padding: 0 2rem;
+  background-color: #0067a3;
+  box-shadow: 0 0.1rem 0.1rem rgba(0, 0, 0, 0.1);
+}
+
+.header .btn {
+  background-color: #4c94be;
+  border-radius: 0.3rem;
+  transition: background-color 150ms;
+}
+
+.header .btn:hover {
+  background-color: #3385b5;
+}
+
+.boards-menu {
+  display: flex;
+}
+
+.boards-btn {
+  display: flex;
+  flex-direction: row;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  padding: 0.6rem 0.8rem;
+  margin-right: 0.8rem;
+}
+
+.boards-btn-icon {
+  font-size: 1.7rem;
+  padding-right: 1.2rem;
+}
+
+.board-search {
+  position: relative;
+}
+
+.board-search-input {
+  height: 3rem;
+  border: none;
+  border-radius: 0.3rem;
+  background-color: #4c94be;
+  width: 100%;
+  padding: 0 3rem 0 1rem;
+  color: #fff;
+}
+
+.board-search-input:hover {
+  background-color: #66a4c8;
+}
+
+.search-icon {
+  font-size: 1.5rem;
+  position: absolute;
+  top: 45%;
+  right: 0.8rem;
+  color: #fff;
+  transform: translateY(-50%) rotate(90deg);
+}
+
+.logo {
+  flex: 1;
+  font-family: "Courgette", cursive;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 150ms;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.logo:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.logo-icon {
+  padding-right: 0.4rem;
+}
+
+.user-settings {
+  display: flex;
+  color: #fff;
+  height: 3rem;
+}
+
+.user-settings-btn {
+  font-size: 1.5rem;
+  width: 3rem;
+  margin-right: 0.8rem;
+}
+
+.user-settings-btn:last-of-type {
+  margin-right: 0;
+}
+
+/* web development bar */
+
+
+.board-info-bar {
+  flex-basis: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.8rem 0;
+  padding: 0 1rem;
+  color: #f6f6f6;
+}
+
+.board-controls {
+  display: flex;
+}
+
+.board-controls .btn {
+  margin-right: 1rem;
+}
+
+.board-controls .btn:last-of-type {
+  margin-right: 0;
+}
+
+.board-info-bar .btn {
+  font-size: 1.4rem;
+  font-weight: 400;
+  transition: background-color 150ms;
+  padding: 0 0.6rem;
+  border-radius: 0.3rem;
+  height: 3rem;
+}
+
+.board-info-bar .btn:hover {
+  background-color: #006aa8;
+}
+
+.private-btn-icon,
+.menu-btn-icon {
+  padding-right: 0.6rem;
+  white-space: nowrap;
+}
+
+.board-title h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+
+/* container & card */
+
+.content {
+  display: flex;
+  flex-direction: row;
+}
+
 
 .container {
   display: flex;
@@ -77,6 +240,9 @@ input:focus {
 .add-list:hover {
   background-color: #FFFFFF2D;
 }
+
+
+/* modal */
 
 
 .textarea {

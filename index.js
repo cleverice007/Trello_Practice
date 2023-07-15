@@ -236,6 +236,7 @@ function dragLeave() {
   this.style.backgroundColor = 'white';
 }
 
+
 function drop(event) {
   if (event.target.classList.contains('container')) {
     const container = event.target;
