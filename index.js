@@ -1,5 +1,5 @@
-// drag and drop 有bug ，card 上下之間移動
-// 少一個 navbar 跟 sidebar
+// adding-list debug
+// modal decoration
 
 // 大卡片裡面新增小卡片
 const containers = document.querySelectorAll('.container');

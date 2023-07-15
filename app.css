@@ -19,7 +19,6 @@ body {
 .header .btn {
   background-color: #4c94be;
   border-radius: 0.3rem;
-  transition: background-color 150ms;
 }
 
 .header .btn:hover {
@@ -78,7 +77,6 @@ body {
   font-size: 2.2rem;
   font-weight: 700;
   color: rgba(255, 255, 255, 0.5);
-  transition: color 150ms;
   text-align: center;
   white-space: nowrap;
   cursor: pointer;
@@ -112,11 +110,10 @@ body {
 
 
 .board-info-bar {
-  flex-basis: 3rem;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  margin: 0.8rem 0;
+  margin-bottom: 30px;
+  margin-top: 20px;
   padding: 0 1rem;
   color: #f6f6f6;
 }
@@ -129,17 +126,12 @@ body {
   margin-right: 1rem;
 }
 
-.board-controls .btn:last-of-type {
-  margin-right: 0;
-}
+
 
 .board-info-bar .btn {
   font-size: 1.4rem;
   font-weight: 400;
-  transition: background-color 150ms;
   padding: 0 0.6rem;
-  border-radius: 0.3rem;
-  height: 3rem;
 }
 
 .board-info-bar .btn:hover {
