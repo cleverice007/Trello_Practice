@@ -115,7 +115,6 @@ body {
   margin-bottom: 30px;
   margin-top: 20px;
   padding: 0 1rem;
-  color: #f6f6f6;
 }
 
 .board-controls {
@@ -124,6 +123,7 @@ body {
 
 .board-controls .btn {
   margin-right: 1rem;
+  color: #fff;
 }
 
 
@@ -138,9 +138,14 @@ body {
   background-color: #006aa8;
 }
 
+.menu-btn{
+  color: #fff;
+}
+
 .private-btn-icon,
 .menu-btn-icon {
   padding-right: 0.6rem;
+  color: #fff;
   white-space: nowrap;
 }
 
