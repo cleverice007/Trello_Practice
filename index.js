@@ -19,18 +19,30 @@ function createModal(cardId, cardTitle, card) {
   titleElement.setAttribute('contenteditable', true);
   titleElement.textContent = cardTitle;
 
+  const descriptionTitle = document.createElement('h2');
+  descriptionTitle.textContent = 'Description';
+  descriptionTitle.classList.add('description-title');
+
   const descriptionElement = document.createElement('textarea');
+  descriptionElement.classList.add('textarea');
   descriptionElement.placeholder = 'Enter description...';
   const descriptionSaveButton = document.createElement('button');
+  descriptionSaveButton.classList.add('save-button');
   descriptionSaveButton.textContent = 'Save';
   descriptionSaveButton.addEventListener('click', function () {
     localStorage.setItem(`description-${cardId}`, descriptionElement.value);
   });
   descriptionElement.value = localStorage.getItem(`description-${cardId}`) || '';
 
+  const commentTitle = document.createElement('h2');
+  commentTitle.textContent = 'Comment';
+  commentTitle.classList.add('comment-title');
+
   const commentElement = document.createElement('textarea');
+  commentElement.classList.add('textarea');
   commentElement.placeholder = 'Enter comment...';
   const commentSaveButton = document.createElement('button');
+  commentSaveButton.classList.add('save-button');
   commentSaveButton.textContent = 'Save';
   commentSaveButton.addEventListener('click', function () {
     localStorage.setItem(`comment-${cardId}`, commentElement.value);
@@ -42,8 +54,10 @@ function createModal(cardId, cardTitle, card) {
   closeButton.innerHTML = '&times;';
 
   modalContent.appendChild(titleElement);
+  modalContent.appendChild(descriptionTitle);
   modalContent.appendChild(descriptionElement);
   modalContent.appendChild(descriptionSaveButton);
+  modalContent.appendChild(commentTitle);
   modalContent.appendChild(commentElement);
   modalContent.appendChild(commentSaveButton);
   modalContent.appendChild(closeButton);
@@ -74,7 +88,6 @@ function createModal(cardId, cardTitle, card) {
   modal.style.display = 'block';
   return modal;
 }
-
 
 
 // create card
@@ -137,6 +150,7 @@ document.addEventListener('click', (event) => {
 
 // 大卡片旁邊新增大卡片
 const adding_list = document.querySelector('.adding-list');
+const content = document.querySelector('.content');
 
 adding_list.addEventListener('click', () => {
   const body = document.querySelector('body');
@@ -153,7 +167,7 @@ adding_list.addEventListener('click', () => {
 
   container.appendChild(input);
   container.appendChild(addButton);
-  body.insertBefore(container, adding_list);
+  content.insertBefore(container, adding_list);
   container.addEventListener('dragover', dragOver);
   container.addEventListener('dragenter', dragEnter);
   container.addEventListener('dragleave', dragLeave);
