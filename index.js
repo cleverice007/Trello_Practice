@@ -2,8 +2,7 @@
 // modal decoration
 
 // 大卡片裡面新增小卡片
-const containers = document.querySelectorAll('.container');
-const cards = document.querySelectorAll('.card');
+const container = document.querySelector('.container');
 
 // create modal
 function createModal(cardId, cardTitle, card) {
@@ -106,23 +105,21 @@ function createCard(cardId) {
       event.preventDefault();
       const title = card.textContent;
       card.innerHTML = `<div class="card-title">${title}</div>`;
-      card.setAttribute('contenteditable', false);
+      card.removeAttribute('contenteditable');
       card.blur();
+      card.classList.add('editable');
       card.addEventListener('click', function () {
         createModal(cardId, card.textContent, card);
-
       });
     }
   });
-
-
-
 
   card.addEventListener('dragstart', dragStart);
   card.addEventListener('dragend', dragEnd);
 
   return card;
 }
+
 
 
 
@@ -181,9 +178,18 @@ adding_list.addEventListener('click', () => {
       titleElement.classList.add('container-title');
       titleElement.textContent = title;
       container.insertBefore(titleElement, input);
+      titleElement.setAttribute('contenteditable', true);
       input.style.display = 'none';
+      
+      titleElement.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          titleElement.blur();
+        }
+      });
     }
   });
+  
 });
 
 // 第一個container的input
@@ -192,32 +198,35 @@ const input = document.querySelector('.container-input');
 input.addEventListener('keydown', function (event) {
   if (event.key === 'Enter') {
     event.preventDefault();
-    const container = document.querySelector('.container');
     const title = input.value;
     const titleElement = document.createElement('div');
     titleElement.classList.add('container-title');
     titleElement.textContent = title;
     container.insertBefore(titleElement, input);
+    titleElement.setAttribute('contenteditable', true);
     input.style.display = 'none';
+    
+    titleElement.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        titleElement.blur();
+      }
+    });
   }
 });
+
 
 // draging card function
 
 let currentCard = null;
 
 // Drag and drop events
-cards.forEach(card => {
-  card.addEventListener('dragstart', dragStart);
-  card.addEventListener('dragend', dragEnd);
-});
 
-containers.forEach(container => {
   container.addEventListener('dragover', dragOver);
   container.addEventListener('dragenter', dragEnter);
   container.addEventListener('dragleave', dragLeave);
   container.addEventListener('drop', drop);
-});
+
 
 function dragStart() {
   currentCard = this;
@@ -255,7 +264,7 @@ function drop(event) {
   if (event.target.classList.contains('container')) {
     const container = event.target;
     const addCardButton = container.querySelector('.add-card');
-    const cardMargin = 10; 
+    const cardMargin = 10;
     container.insertBefore(currentCard, addCardButton);
 
     container.style.height = `${container.clientHeight + currentCard.offsetHeight + cardMargin + addCardButton.clientHeight}px`;
