@@ -1,5 +1,4 @@
-// adding-list debug
-// modal decoration
+//rwd
 
 // 大卡片裡面新增小卡片
 const container = document.querySelector('.container');

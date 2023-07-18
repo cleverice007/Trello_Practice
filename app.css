@@ -45,7 +45,9 @@ body {
 }
 
 .board-search {
+  display: flex;
   position: relative;
+
 }
 
 .board-search-input {
@@ -77,9 +79,8 @@ body {
   font-size: 2.2rem;
   font-weight: 700;
   color: rgba(255, 255, 255, 0.5);
-  text-align: center;
-  white-space: nowrap;
   cursor: pointer;
+  text-align: center;
 }
 
 .logo:hover {
@@ -105,6 +106,22 @@ body {
 .user-settings-btn:last-of-type {
   margin-right: 0;
 }
+
+@media (max-width: 768px) {
+  .user-settings {
+    display: none;
+  }
+  .logo {
+    display: none;
+  }
+
+  .menu-btn{
+    display: none;
+  }
+ 
+}
+
+
 
 /* web development bar */
 
@@ -156,11 +173,15 @@ body {
 }
 
 
-/* container & card */
+
+
+
+
 
 .content {
   display: flex;
   flex-direction: row;
+  overflow-x: auto;
 }
 
 
@@ -239,6 +260,7 @@ input:focus {
   padding: 10px 80px;
   border: none;
   text-align: left;
+  margin-right: 20px;
 }
 
 .add-list:hover {
